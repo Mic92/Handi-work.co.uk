@@ -41,7 +41,6 @@ nav.main a:hover{color:var(--spruce)}
 .btn:hover{transform:translateY(-1px)}
 .btn-brass{background:var(--brass-btn);color:var(--white)}
 .btn-ghost{border:2px solid var(--plaster);color:var(--plaster)}
-.btn-spruce{background:var(--spruce);color:var(--white)}
 nav.main .btn{padding:.55em 1.1em}
 /* on phones the fixed call bar replaces the header button; keep section links reachable */
 @media(max-width:760px){.wordmark{font-size:1.1rem}nav.main{gap:14px}nav.main a.navlink{font-size:.86rem;padding:.7em 0}nav.main .btn{display:none}}
@@ -51,20 +50,19 @@ nav.main .btn{padding:.55em 1.1em}
 .hero{background:var(--spruce);color:var(--plaster);overflow:hidden}
 .hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center;padding-top:64px;padding-bottom:72px}
 .hero h1{font-size:clamp(2.3rem,4.6vw,3.6rem);margin:.55em 0 .5em}
-.hero p.lede{font-size:1.12rem;max-width:44ch}
+.hero p.lede{font-size:1.12rem;max-width:44ch;margin-top:22px}
 .hero .cta{margin-top:30px;display:flex;gap:14px;flex-wrap:wrap}
 .hero-stack{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .hero-stack figure{border-radius:10px;overflow:hidden;box-shadow:0 12px 30px rgba(0,0,0,.28)}
 .hero-stack img{width:100%;height:100%;object-fit:cover}
-.hero-stack figure:nth-child(1){grid-row:span 2}
-.hero-stack figure:nth-child(1) img{height:100%}
-.hero-stack figure:nth-child(2) img,.hero-stack figure:nth-child(3) img{aspect-ratio:4/4.4}
+.hero-stack figure:first-child{grid-row:span 2}
+.hero-stack figure+figure img{aspect-ratio:4/4.4}
 .trust{margin-top:34px;display:flex;gap:26px;flex-wrap:wrap;font-size:.9rem}
 .trust b{display:block;font-family:'Bricolage Grotesque',sans-serif;font-size:1.15rem;color:var(--brass-lite)}
 @media(max-width:860px){.hero .wrap{grid-template-columns:1fr;padding-top:46px}.hero-stack{order:2}}
 
 /* ---------- spirit-level heading rule (signature) ---------- */
-.level{display:flex;align-items:center;gap:0;margin:14px 0 0;max-width:280px}
+.level{display:flex;align-items:center;margin:14px 0 0;max-width:280px}
 .level::before,.level::after{content:"";flex:1;height:2px;background:var(--stone)}
 .level .bubble{width:46px;height:14px;border:2px solid var(--brass);border-radius:9px;position:relative;flex:none;margin:0 -1px}
 .level .bubble::before{content:"";position:absolute;inset:2px auto 2px 50%;transform:translateX(-50%);width:12px;border-radius:5px;background:var(--brass-lite)}
@@ -111,8 +109,9 @@ section{padding:78px 0}
 .masonry figcaption{font-size:.88rem;padding:10px 14px 12px}
 
 /* ---------- lightbox ---------- */
-.lightbox{position:fixed;inset:0;background:rgba(20,26,22,.93);display:none;align-items:center;justify-content:center;z-index:100;padding:28px;flex-direction:column;gap:14px}
-.lightbox.open{display:flex}
+.lightbox{border:0;padding:28px;background:rgba(20,26,22,.93);max-width:none;max-height:none;width:100%;height:100%;flex-direction:column;gap:14px;align-items:center;justify-content:center}
+.lightbox[open]{display:flex}
+body:has(.lightbox[open]){overflow:hidden}
 .lightbox img{max-width:min(92vw,980px);max-height:82vh;border-radius:8px}
 .lightbox p{color:var(--plaster);font-size:.95rem}
 .lightbox button{position:absolute;top:18px;right:18px;font:inherit;font-weight:700;background:var(--plaster);color:var(--ink);border:0;border-radius:999px;padding:.5em 1.1em;min-height:44px;cursor:pointer}
@@ -180,7 +179,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
       <p class="eyebrow">Family-run · Based in Leith, Edinburgh</p>
       <h1>Kitchens, bathrooms, and everything your home's been putting&nbsp;off.</h1>
       <div class="level" role="presentation"><span class="bubble"></span></div>
-      <p class="lede" style="margin-top:22px">Handi-Work fits kitchens and bathrooms from strip-out to final coat of paint — plus tiling, doors, decorating and the smaller jobs in between. One trusted pair of hands, start to finish.</p>
+      <p class="lede">Handi-Work fits kitchens and bathrooms from strip-out to final coat of paint — plus tiling, doors, decorating and the smaller jobs in between. One trusted pair of hands, start to finish.</p>
       <div class="cta">
         <a class="btn btn-brass" href="tel:+447871069001">Call for a free quote</a>
         <a class="btn btn-ghost" href="#work">See the work</a>
@@ -248,7 +247,6 @@ footer .wrap{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
       <button type="button" class="chip" data-filter="tiling" aria-pressed="false">Tiling</button>
       <button type="button" class="chip" data-filter="decorating" aria-pressed="false">Painting &amp; doors</button>
     </div>
-    <p class="sr-count" id="galleryCount" aria-live="polite" style="position:absolute;left:-9999px"></p>
     <div class="masonry" id="gallery"></div>
   </div>
 </section>
@@ -294,7 +292,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
 
 <footer>
   <div class="wrap">
-    <span>© <span id="yr"></span> Handi-Work · Edinburgh</span>
+    <span>© Handi-Work · Edinburgh</span>
     <span>handi-work.co.uk</span>
   </div>
 </footer>
@@ -304,75 +302,45 @@ footer .wrap{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
   <a class="cb-quote" href="#contact">Get a quote</a>
 </nav>
 
-<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-labelledby="lbCap" hidden>
-  <button type="button" id="lbClose" aria-label="Close photo">Close ✕</button>
-  <img id="lbImg" src="" alt="">
+<dialog class="lightbox" id="lightbox" aria-labelledby="lbCap">
+  <button type="button" id="lbClose" aria-label="Close photo" autofocus>Close ✕</button>
+  <img id="lbImg" alt="">
   <p id="lbCap"></p>
-</div>
+</dialog>
 
 <script src="photos.js"></script>
 <script>
-document.getElementById('yr').textContent = new Date().getFullYear();
-
-// build the gallery from the PHOTOS list in photos.js
 const gallery = document.getElementById('gallery');
-const galleryCount = document.getElementById('galleryCount');
 PHOTOS.forEach((p, i) => {
   const fig = document.createElement('figure');
   fig.dataset.cat = p.category;
-  const btn = document.createElement('button');
-  btn.type = 'button';
-  btn.setAttribute('aria-label', 'Enlarge photo: ' + p.caption);
-  const img = document.createElement('img');
-  img.src = 'img/' + p.file;
-  img.alt = '';
+  fig.innerHTML = '<button type="button"><img alt="" decoding="async"></button><figcaption></figcaption>';
+  const img = fig.querySelector('img');
   if (i > 5) img.loading = 'lazy';
-  img.decoding = 'async';
-  btn.appendChild(img);
-  const cap = document.createElement('figcaption');
-  cap.textContent = p.caption;
-  fig.append(btn, cap);
-  gallery.appendChild(fig);
+  img.src = 'img/' + p.file;
+  fig.querySelector('button').setAttribute('aria-label', 'Enlarge photo: ' + p.caption);
+  fig.querySelector('figcaption').textContent = p.caption;
+  gallery.append(fig);
 });
 
-// gallery filter
 const chips = document.querySelectorAll('.chip');
-const figs = document.querySelectorAll('#gallery figure');
 chips.forEach(c => c.addEventListener('click', () => {
-  chips.forEach(x => x.setAttribute('aria-pressed', String(x === c)));
+  chips.forEach(x => x.setAttribute('aria-pressed', x === c));
   const f = c.dataset.filter;
-  let n = 0;
-  figs.forEach(fig => { const hide = f !== 'all' && fig.dataset.cat !== f; fig.classList.toggle('hide', hide); if (!hide) n++; });
-  galleryCount.textContent = 'Showing ' + n + ' photos';
+  for (const fig of gallery.children) fig.classList.toggle('hide', f !== 'all' && fig.dataset.cat !== f);
 }));
 
-// lightbox
-// lightbox: moves focus in on open, keeps Tab inside, restores focus on close
-const lb = document.getElementById('lightbox'), lbImg = document.getElementById('lbImg'), lbCap = document.getElementById('lbCap'), lbClose = document.getElementById('lbClose');
-const pageMain = document.getElementById('main');
-let lastFocus = null;
-function openFig(fig){
-  const cap = fig.querySelector('figcaption').textContent;
-  lbImg.src = fig.querySelector('img').src; lbImg.alt = cap;
-  lbCap.textContent = cap;
-  lastFocus = document.activeElement;
-  lb.hidden = false; lb.classList.add('open');
-  pageMain.setAttribute('inert', '');
-  document.body.style.overflow = 'hidden';
-  lbClose.focus();
-}
-function closeLb(){
-  if (lb.hidden) return;
-  lb.classList.remove('open'); lb.hidden = true; lbImg.src = '';
-  pageMain.removeAttribute('inert');
-  document.body.style.overflow = '';
-  if (lastFocus) lastFocus.focus();
-}
-gallery.addEventListener('click', e => { const b = e.target.closest('button'); if (b) openFig(b.parentNode); });
-lbClose.addEventListener('click', closeLb);
-lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
-lb.addEventListener('keydown', e => { if (e.key === 'Tab') { e.preventDefault(); lbClose.focus(); } });
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLb(); });
+const lb = document.getElementById('lightbox'), lbImg = document.getElementById('lbImg'), lbCap = document.getElementById('lbCap');
+gallery.addEventListener('click', e => {
+  const btn = e.target.closest('button');
+  if (!btn) return;
+  lbImg.src = btn.querySelector('img').src;
+  lbImg.alt = lbCap.textContent = btn.nextElementSibling.textContent;
+  lb.showModal();
+});
+lb.addEventListener('close', () => { lbImg.removeAttribute('src'); });
+document.getElementById('lbClose').addEventListener('click', () => lb.close());
+lb.addEventListener('click', e => { if (e.target === lb) lb.close(); });
 </script>
 </body>
 </html>
