@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://handi-work.co.uk/sitemap.xml
